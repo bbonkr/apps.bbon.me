@@ -1,3 +1,4 @@
+export * from './Card';
 export * from './Content';
 export * from './ContentWrapper';
 export * from './Footer';

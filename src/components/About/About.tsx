@@ -1,5 +1,10 @@
 import React from 'react';
+import { Content } from '../Layouts';
 
 export const About = () => {
-    return <div>About</div>;
+    return (
+        <Content title="About">
+            <div>About</div>
+        </Content>
+    );
 };

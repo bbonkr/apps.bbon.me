@@ -1,0 +1,24 @@
+/* .output {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+} */
+
+/* .output .output-verification {
+    flex: 1;
+    max-width: 50%;
+} */
+
+.output div p {
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    padding: 0.8rem;
+    /* background-color: #f7f7f7; */
+}
+
+/* .output .output-replaced {
+    flex: 1;
+    max-width: 50%;
+} */

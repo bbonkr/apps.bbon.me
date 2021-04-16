@@ -6,5 +6,6 @@ interface Author {
 
 export interface Config {
     title: string;
+    version?: string;
     author: Author;
 }

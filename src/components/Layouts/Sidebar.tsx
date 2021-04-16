@@ -18,7 +18,7 @@ export const Sidebar = () => {
                     <img src="/bbon-icon.png" alt="Logo" />
                     {config.title}
                 </Link>
-                <h5 className="sidebar-title">Getting started</h5>
+                {/* <h5 className="sidebar-title">Getting started</h5> */}
                 <div className="sidebar-divider"></div>
 
                 <Link
