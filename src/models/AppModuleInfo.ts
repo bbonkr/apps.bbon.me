@@ -7,4 +7,5 @@ export interface AppModuleInfo {
     linkTo?: string;
     href?: string;
     target?: string;
+    app?: React.ReactNode;
 }

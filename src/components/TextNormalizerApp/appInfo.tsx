@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 import { AppModuleInfo } from '../../models/AppModuleInfo';
+import { TextNormalizerApp } from './TextNormalizerApp';
 
 export const appInfo: AppModuleInfo = {
     title: 'Text Normailzer',
@@ -12,4 +13,5 @@ export const appInfo: AppModuleInfo = {
     ),
     linkTo: '/',
     icon: <FaPaperPlane />,
+    app: <TextNormalizerApp />,
 };

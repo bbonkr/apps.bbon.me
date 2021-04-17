@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaRegCopy } from 'react-icons/fa';
 import { useStringReplaceModule } from '../../hooks';
-import { Card, Content } from '../Layouts';
+import { Card, Container, Content, Row } from '../Layouts';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import './style.css';
 
 export const TextNormalizerApp = () => {
     const [text, setText] = useState('');
+    const [isCopied, setIsCopied] = useState(false);
     const replacedParagraph = useRef<HTMLPreElement>(null);
 
     const {
@@ -24,7 +25,12 @@ export const TextNormalizerApp = () => {
         setText((_) => event.target.value);
     };
 
-    const handleClickCopy = () => {};
+    const handleCopied = (text: string, result: boolean) => {
+        setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 1500);
+    };
 
     useEffect(() => {
         verify(text);
@@ -33,8 +39,8 @@ export const TextNormalizerApp = () => {
 
     return (
         <Content title="Text Normalizer">
-            <div className="container-fluid ">
-                <div className="row row-eq-spacing-sm">
+            <Container>
+                <Row equalsInBetweenSpacing="sm">
                     <div className="col-sm-12">
                         <Content>
                             <div className="form-group">
@@ -49,14 +55,14 @@ export const TextNormalizerApp = () => {
                             </div>
                         </Content>
                     </div>
-                </div>
+                </Row>
                 {!text ? (
                     <React.Fragment></React.Fragment>
                 ) : verifyResults.filter((x) => x.hit).length > 0 ? (
                     <Card title="⚠ Warnings" useTitleBorder>
                         <div>
                             <p>Found below.</p>
-                            {verifyResults.map((x) => {
+                            {verifyResults.map((x, index) => {
                                 return (
                                     <div
                                         key={x.label}
@@ -64,11 +70,14 @@ export const TextNormalizerApp = () => {
                                     >
                                         <input
                                             type="checkbox"
-                                            id="checkbox-1"
+                                            id={`checkbox-${index}`}
                                             checked={x.hit}
                                             readOnly
                                         />
-                                        <label className="checkbox-1">
+                                        <label
+                                            htmlFor={`checkbox-${index}`}
+                                            className="checkbox-1"
+                                        >
                                             {x.label}
                                         </label>
                                     </div>
@@ -82,7 +91,7 @@ export const TextNormalizerApp = () => {
                     </Card>
                 )}
 
-                <div className="row row-eq-spacing-sm output">
+                <Row equalsInBetweenSpacing="sm" className="output">
                     <div className="col-sm-6 output-verification">
                         <Card title="Verification" useTitleBorder>
                             <pre
@@ -111,15 +120,16 @@ export const TextNormalizerApp = () => {
                                                     i === arr.length - 1,
                                             )?.text ?? '',
                                         )}
+                                        onCopy={handleCopied}
                                     >
                                         <button
                                             className="btn"
-                                            onClick={handleClickCopy}
+                                            disabled={!text || isCopied}
                                         >
                                             <span className="">
                                                 <FaRegCopy />
                                             </span>{' '}
-                                            Copy
+                                            {isCopied ? 'Copied' : 'Copy'}
                                         </button>
                                     </CopyToClipboard>
                                 )
@@ -137,8 +147,8 @@ export const TextNormalizerApp = () => {
                             ></pre>
                         </Card>
                     </div>
-                </div>
-            </div>
+                </Row>
+            </Container>
         </Content>
     );
 };
