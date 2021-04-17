@@ -10,22 +10,22 @@ export const About = () => {
             <div className="container-fluid">
                 <h3>PWA apps</h3>
                 <div className="row justify-content-center">
-                    {appModules.map((content) => (
-                        <div className="col-sm-6 col-md-5 col-lg-4">
+                    {appModules.map((app) => (
+                        <div
+                            key={app.title}
+                            className="col-sm-6 col-md-5 col-lg-4"
+                        >
                             <Card
-                                title={content.title}
+                                title={app.title}
                                 footer={
-                                    content.linkTo && (
-                                        <Link
-                                            to={content.linkTo}
-                                            className="btn"
-                                        >
+                                    app.linkTo && (
+                                        <Link to={app.linkTo} className="btn">
                                             Navigate to app
                                         </Link>
                                     )
                                 }
                             >
-                                {content.description}
+                                {app.description}
                             </Card>
                         </div>
                     ))}

@@ -3,6 +3,9 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -71,6 +74,6 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.join(path.resolve(__dirname, '..'), 'out', 'dist'),
-        publicPath: '/dist',
+        publicPath: '/dist/',
     },
 };
