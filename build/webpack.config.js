@@ -65,11 +65,12 @@ module.exports = {
             // and not allow any straggling "old" SWs to hang around
             clientsClaim: true,
             skipWaiting: true,
+            swDest: '../service-worker.js',
         }),
     ],
     output: {
         filename: '[name].js',
         path: path.join(path.resolve(__dirname, '..'), 'out', 'dist'),
-        publicPath: 'dist/',
+        publicPath: '/',
     },
 };
