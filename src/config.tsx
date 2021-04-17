@@ -4,7 +4,7 @@ import { FaBlog, FaGithub, FaFacebook, FaTwitter } from 'react-icons/fa';
 
 export const config: Config = {
     title: 'Apps',
-    gitHubRepositoryUrl: 'https://github.com/bbonkr/string-normalizer-webapp',
+    gitHubRepositoryUrl: 'https://github.com/bbonkr/apps.bbon.me',
     gitHubIssueUrl: '/issues',
     version: 'v0.1.0',
     author: {

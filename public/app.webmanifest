@@ -1,7 +1,7 @@
 {
-    "name": "String Normalizer",
-    "short_name": "StringNormalizer",
-    "description": "String Normalizer: Verify and remove strange text.",
+    "name": "Apps.bbon.me",
+    "short_name": "Apps",
+    "description": "Web app provides some feature",
     "icons": [
         {
             "src": "bbon-icon-16.png",
