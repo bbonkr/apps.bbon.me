@@ -8,6 +8,7 @@ import './style.css';
 
 export const TextNormalizerApp = () => {
     const [text, setText] = useState('');
+    const [isCopied, setIsCopied] = useState(false);
     const replacedParagraph = useRef<HTMLPreElement>(null);
 
     const {
@@ -24,7 +25,12 @@ export const TextNormalizerApp = () => {
         setText((_) => event.target.value);
     };
 
-    const handleClickCopy = () => {};
+    const handleCopied = (text: string, result: boolean) => {
+        setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 1500);
+    };
 
     useEffect(() => {
         verify(text);
@@ -56,7 +62,7 @@ export const TextNormalizerApp = () => {
                     <Card title="⚠ Warnings" useTitleBorder>
                         <div>
                             <p>Found below.</p>
-                            {verifyResults.map((x) => {
+                            {verifyResults.map((x, index) => {
                                 return (
                                     <div
                                         key={x.label}
@@ -64,11 +70,14 @@ export const TextNormalizerApp = () => {
                                     >
                                         <input
                                             type="checkbox"
-                                            id="checkbox-1"
+                                            id={`checkbox-${index}`}
                                             checked={x.hit}
                                             readOnly
                                         />
-                                        <label className="checkbox-1">
+                                        <label
+                                            htmlFor={`checkbox-${index}`}
+                                            className="checkbox-1"
+                                        >
                                             {x.label}
                                         </label>
                                     </div>
@@ -111,15 +120,16 @@ export const TextNormalizerApp = () => {
                                                     i === arr.length - 1,
                                             )?.text ?? '',
                                         )}
+                                        onCopy={handleCopied}
                                     >
                                         <button
                                             className="btn"
-                                            onClick={handleClickCopy}
+                                            disabled={!text || isCopied}
                                         >
                                             <span className="">
                                                 <FaRegCopy />
                                             </span>{' '}
-                                            Copy
+                                            {isCopied ? 'Copied' : 'Copy'}
                                         </button>
                                     </CopyToClipboard>
                                 )

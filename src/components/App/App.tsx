@@ -11,6 +11,7 @@ import { MainLayout, ContentWrapper, Footer, Sidebar } from '../Layouts';
 import { Position, Theme } from '../../models';
 import smoothscroll from 'smoothscroll-polyfill';
 import { Loading } from '../Loading';
+import { appModules } from '../../appModules';
 
 const Header = AsyncComponent(() => import('../Layouts'), {
     resolveComponent: (props) => props.Header,
@@ -116,9 +117,12 @@ export const App = () => {
                     <Header />
                     <ContentWrapper scrollPosition={scrollPosition}>
                         <Switch>
-                            <Route path="/" exact>
-                                <StringNormalizer />
-                            </Route>
+                            {appModules.map((app) => (
+                                <Route path={app.linkTo} exact>
+                                    {app.app}
+                                </Route>
+                            ))}
+
                             <Route path="/about" exact>
                                 <About />
                             </Route>
