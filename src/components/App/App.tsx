@@ -122,7 +122,7 @@ export const App = () => {
                             ></Route>
                         </Switch>
                     </ContentWrapper>
-                    <Footer />
+                    <Footer onClickScrollToTop={handleClickScrollTop} />
                 </MainLayout>
             ) : (
                 <Loading />

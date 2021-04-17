@@ -8,7 +8,7 @@ import './style.css';
 
 export const StringNormalizer = () => {
     const [text, setText] = useState('');
-    const replacedParagraph = useRef<HTMLParagraphElement>(null);
+    const replacedParagraph = useRef<HTMLPreElement>(null);
 
     const {
         verify,
@@ -34,19 +34,26 @@ export const StringNormalizer = () => {
     return (
         <Content title="String Normalizer">
             <div className="container-fluid ">
-                <div className="form-group">
-                    <label htmlFor="text-here">Text:</label>
-                    <textarea
-                        className="form-control"
-                        id="text-here"
-                        onChange={handleChangeText}
-                        value={text}
-                    ></textarea>
+                <div className="row row-eq-spacing-sm">
+                    <div className="col-sm-12">
+                        <Content>
+                            <div className="form-group">
+                                <label htmlFor="text-here">Text:</label>
+                                <textarea
+                                    className="form-control"
+                                    id="text-here"
+                                    onChange={handleChangeText}
+                                    value={text}
+                                    placeholder=""
+                                ></textarea>
+                            </div>
+                        </Content>
+                    </div>
                 </div>
                 {!text ? (
                     <React.Fragment></React.Fragment>
                 ) : verifyResults.filter((x) => x.hit).length > 0 ? (
-                    <Card title="⚠ Warnings">
+                    <Card title="⚠ Warnings" useTitleBorder>
                         <div>
                             <p>Found below.</p>
                             {verifyResults.map((x) => {
@@ -70,15 +77,15 @@ export const StringNormalizer = () => {
                         </div>
                     </Card>
                 ) : (
-                    <Card title="404">
+                    <Card title="Notification" useTitleBorder>
                         <p>Does not find anything strange.</p>
                     </Card>
                 )}
 
                 <div className="row row-eq-spacing-sm output">
                     <div className="col-sm-6 output-verification">
-                        <Card title="Verification">
-                            <p
+                        <Card title="Verification" useTitleBorder>
+                            <pre
                                 className="text-smoothing-antialiased-lm"
                                 dangerouslySetInnerHTML={{
                                     __html:
@@ -86,12 +93,13 @@ export const StringNormalizer = () => {
                                             (x, i, arr) => i === arr.length - 1,
                                         )?.text ?? '',
                                 }}
-                            ></p>
+                            ></pre>
                         </Card>
                     </div>
                     <div className="col-sm-6 output-replaced">
                         <Card
                             title="Replaced"
+                            useTitleBorder
                             footer={
                                 replaceResult.find(
                                     (x, i, arr) => i === arr.length - 1,
@@ -117,7 +125,7 @@ export const StringNormalizer = () => {
                                 )
                             }
                         >
-                            <p
+                            <pre
                                 ref={replacedParagraph}
                                 className="text-smoothing-antialiased-lm"
                                 dangerouslySetInnerHTML={{
@@ -126,7 +134,7 @@ export const StringNormalizer = () => {
                                             (x, i, arr) => i === arr.length - 1,
                                         )?.text ?? '',
                                 }}
-                            ></p>
+                            ></pre>
                         </Card>
                     </div>
                 </div>

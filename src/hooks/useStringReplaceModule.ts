@@ -20,23 +20,25 @@ export const useStringReplaceModule = () => {
         return source
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;')
-            .replace(/ /g, '&nbsp;')
-            .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-            .replace(/(?:\r\n|\r|\n)/g, '<br />');
+            .replace(/>/g, '&gt;');
+        // .replace(/"/g, '&quot;')
+        // .replace(/'/g, '&#039;')
+        // .replace(/ /g, '&nbsp;')
+        // .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
+        // .replace(/(?:\r\n|\r|\n)/g, '<br />')
     };
 
     const unescape = (source: string): string => {
-        return source
-            .replace(/<br \/>/g, '\n')
-            .replace(/&nbsp;/g, ' ')
-            .replace(/&amp;/g, '&')
-            .replace(/&lt;/g, '<')
-            .replace(/&gt;/g, '>')
-            .replace(/&quot;/g, '"')
-            .replace(/&#039;/g, "'");
+        return (
+            source
+                // .replace(/<br \/>/g, '\n')
+                // .replace(/&nbsp;/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+            // .replace(/&quot;/g, '"')
+            // .replace(/&#039;/g, "'")
+        );
     };
 
     const verify = (source: string) => {

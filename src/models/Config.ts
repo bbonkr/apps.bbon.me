@@ -1,3 +1,5 @@
+import { Link } from './Link';
+
 interface Author {
     name: string;
     email: string;
@@ -6,6 +8,10 @@ interface Author {
 
 export interface Config {
     title: string;
+    description?: string;
+    gitHubRepositoryUrl?: string;
+    gitHubIssueUrl?: string;
     version?: string;
     author: Author;
+    contacts?: Link[];
 }

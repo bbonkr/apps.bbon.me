@@ -16,9 +16,13 @@ export const Sidebar = () => {
             <div className="sidebar-menu">
                 <Link to="/" className="sidebar-brand">
                     <img src="/bbon-icon.png" alt="Logo" />
-                    {config.title}
+                    {config.title}{' '}
                 </Link>
-                {/* <h5 className="sidebar-title">Getting started</h5> */}
+
+                <div className="sidebar-content">
+                    <p>{config.description}</p>
+                </div>
+                <h5 className="sidebar-title">PWAs</h5>
                 <div className="sidebar-divider"></div>
 
                 <Link
@@ -29,8 +33,11 @@ export const Sidebar = () => {
                     <span className="sidebar-icon">
                         <FaRegPaperPlane />
                     </span>
-                    {config.title}
+                    String Normailzer
                 </Link>
+                <br />
+                <h5 className="sidebar-title">Information</h5>
+                <div className="sidebar-divider"></div>
                 <Link
                     to="/about"
                     className="sidebar-link sidebar-link-with-icon"
