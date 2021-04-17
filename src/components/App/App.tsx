@@ -68,33 +68,39 @@ export const App = () => {
             halfmoon.toggleDarkMode();
         }
 
+        const handleWindowLoad = () => {
+            navigator.serviceWorker
+                .getRegistrations()
+                .then((registerations) => {
+                    if (registerations.length === 0) {
+                        return navigator.serviceWorker.register(
+                            '/dist/service-worker.js',
+                        );
+                    } else {
+                        registerations.forEach((r) => {
+                            return r.update();
+                        });
+                    }
+                })
+                .then((registration) => {
+                    if (registration) {
+                        console.log('SW registered: ', registration);
+                    }
+                })
+                .catch((err) => {
+                    console.log('SW registration failed: ', err);
+                });
+        };
+
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker
-                    .getRegistrations()
-                    .then((registerations) => {
-                        if (registerations.length === 0) {
-                            return navigator.serviceWorker.register(
-                                '/service-worker.js',
-                            );
-                        } else {
-                            registerations.forEach((r) => {
-                                return r.update();
-                            });
-                        }
-                    })
-                    .then((registration) => {
-                        if (registration) {
-                            console.log('SW registered: ', registration);
-                        }
-                    })
-                    .catch((err) => {
-                        console.log('SW registration failed: ', err);
-                    });
-            });
+            window.addEventListener('load', handleWindowLoad);
         }
 
         console.info('🌈 App started. 🌠');
+
+        return () => {
+            window.removeEventListener('load', handleWindowLoad);
+        };
     }, []);
 
     return (
