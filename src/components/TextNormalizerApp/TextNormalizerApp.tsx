@@ -6,7 +6,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import './style.css';
 
-export const StringNormalizer = () => {
+export const TextNormalizerApp = () => {
     const [text, setText] = useState('');
     const replacedParagraph = useRef<HTMLPreElement>(null);
 
@@ -32,7 +32,7 @@ export const StringNormalizer = () => {
     }, [text]);
 
     return (
-        <Content title="String Normalizer">
+        <Content title="Text Normalizer">
             <div className="container-fluid ">
                 <div className="row row-eq-spacing-sm">
                     <div className="col-sm-12">

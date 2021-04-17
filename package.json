@@ -1,8 +1,30 @@
 {
-    "name": "string-normalizer-webapp",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "name": "apps.bbon.me",
+    "displayName": "apps.bbon.me",
+    "version": "0.1.0",
+    "description": "PWA apps.bbon.me",
+    "main": "out/dist/app.js",
+    "keywords": [
+        "text normalizer",
+        "pwa",
+        "typescript",
+        "netlify",
+        "github",
+        "bbonkr"
+    ],
+    "author": {
+        "name": "Pon Cheol Ku",
+        "email": "dev@bbon.kr",
+        "url": "https://bbon.kr"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bbonkr/apps.bbon.me.git"
+    },
+    "bugs": {
+        "email": "dev@bbon.kr",
+        "url": "https://github.com/bbonkr/apps.bbon.me/issues"
+    },
     "scripts": {
         "dev": "webpack-dev-server --config build/webpack.config.dev.js --mode development",
         "build:dev": "webpack --config build/webpack.config.dev.js",
@@ -10,8 +32,6 @@
         "build": "cross-env NODE_ENV=production npm run build:prod",
         "lint": "eslint --ext .ts,.tsx src/ --quiet --fix"
     },
-    "keywords": [],
-    "author": "Pon Cheol Ku <dev@bbon.kr> (http://bbon.kr/)",
     "license": "MIT",
     "dependencies": {
         "@loadable/component": "^5.14.1",

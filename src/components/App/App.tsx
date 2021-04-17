@@ -17,8 +17,8 @@ const Header = AsyncComponent(() => import('../Layouts'), {
     fallback: <LoadingComponent />,
 });
 
-const StringNormalizer = AsyncComponent(() => import('../StringNormalizer'), {
-    resolveComponent: (props) => props.StringNormalizer,
+const StringNormalizer = AsyncComponent(() => import('../TextNormalizerApp'), {
+    resolveComponent: (props) => props.TextNormalizerApp,
     fallback: <LoadingComponent />,
 });
 
@@ -71,15 +71,25 @@ export const App = () => {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker
-                    .register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('SW registered: ', registration);
+                    .getRegistrations()
+                    .then((registerations) => {
+                        if (registerations.length === 0) {
+                            return navigator.serviceWorker.register(
+                                '/service-worker.js',
+                            );
+                        } else {
+                            registerations.forEach((r) => {
+                                return r.update();
+                            });
+                        }
                     })
-                    .catch((registrationError) => {
-                        console.log(
-                            'SW registration failed: ',
-                            registrationError,
-                        );
+                    .then((registration) => {
+                        if (registration) {
+                            console.log('SW registered: ', registration);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log('SW registration failed: ', err);
                     });
             });
         }
