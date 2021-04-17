@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaRegCopy } from 'react-icons/fa';
 import { useStringReplaceModule } from '../../hooks';
-import { Card, Content } from '../Layouts';
+import { Card, Container, Content, Row } from '../Layouts';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import './style.css';
@@ -39,8 +39,8 @@ export const TextNormalizerApp = () => {
 
     return (
         <Content title="Text Normalizer">
-            <div className="container-fluid ">
-                <div className="row row-eq-spacing-sm">
+            <Container>
+                <Row equalsInBetweenSpacing="sm">
                     <div className="col-sm-12">
                         <Content>
                             <div className="form-group">
@@ -55,7 +55,7 @@ export const TextNormalizerApp = () => {
                             </div>
                         </Content>
                     </div>
-                </div>
+                </Row>
                 {!text ? (
                     <React.Fragment></React.Fragment>
                 ) : verifyResults.filter((x) => x.hit).length > 0 ? (
@@ -91,7 +91,7 @@ export const TextNormalizerApp = () => {
                     </Card>
                 )}
 
-                <div className="row row-eq-spacing-sm output">
+                <Row equalsInBetweenSpacing="sm" className="output">
                     <div className="col-sm-6 output-verification">
                         <Card title="Verification" useTitleBorder>
                             <pre
@@ -147,8 +147,8 @@ export const TextNormalizerApp = () => {
                             ></pre>
                         </Card>
                     </div>
-                </div>
-            </div>
+                </Row>
+            </Container>
         </Content>
     );
 };

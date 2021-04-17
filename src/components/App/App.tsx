@@ -118,7 +118,7 @@ export const App = () => {
                     <ContentWrapper scrollPosition={scrollPosition}>
                         <Switch>
                             {appModules.map((app) => (
-                                <Route path={app.linkTo} exact>
+                                <Route key={app.title} path={app.linkTo} exact>
                                     {app.app}
                                 </Route>
                             ))}
