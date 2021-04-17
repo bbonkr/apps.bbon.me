@@ -1,0 +1,32 @@
+/* .output {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+} */
+
+/* .output .output-verification {
+    flex: 1;
+    max-width: 50%;
+} */
+
+.output div p,
+.output div pre {
+    padding: 0.8rem;
+    /* background-color: #f7f7f7; */
+    white-space: pre-wrap;
+    /* CSS3*/
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-all;
+    /* Internet Explorer 5.5+ */
+}
+
+/* .output .output-replaced {
+    flex: 1;
+    max-width: 50%;
+} */
