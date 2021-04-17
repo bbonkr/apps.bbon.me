@@ -24,6 +24,7 @@
     /* Opera 7 */
     word-wrap: break-all;
     /* Internet Explorer 5.5+ */
+    word-break: break-all;
 }
 
 /* .output .output-replaced {
