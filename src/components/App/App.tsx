@@ -74,7 +74,7 @@ export const App = () => {
                 .then((registerations) => {
                     if (registerations.length === 0) {
                         return navigator.serviceWorker.register(
-                            '/dist/service-worker.js',
+                            '/service-worker.js',
                         );
                     } else {
                         registerations.forEach((r) => {
