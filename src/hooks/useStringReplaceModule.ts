@@ -92,5 +92,5 @@ export const useStringReplaceModule = () => {
     };
 };
 
-type useStringReplaceModuleHook = typeof useStringReplaceModule;
-export type UseStringReplaceModule = ReturnType<useStringReplaceModuleHook>;
+type UseStringReplaceModuleHook = typeof useStringReplaceModule;
+export type UseStringReplaceModule = ReturnType<UseStringReplaceModuleHook>;
