@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaRegPaperPlane, FaInfoCircle } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { FaInfoCircle } from 'react-icons/fa';
 import halfmoon from 'halfmoon';
 import { config } from '../../config';
 import { appModules } from '../../appModules';
@@ -11,7 +11,6 @@ export const Sidebar = () => {
     ) => {
         halfmoon.toggleSidebar();
     };
-
     return (
         <div className="sidebar">
             <div className="sidebar-menu">
@@ -29,7 +28,7 @@ export const Sidebar = () => {
                     <Link
                         key={app.title}
                         to={app.linkTo ?? '/'}
-                        className="sidebar-link sidebar-link-with-icon"
+                        className={`sidebar-link sidebar-link-with-icon`}
                         onClick={handleClickMenuItem}
                     >
                         {app.icon && (

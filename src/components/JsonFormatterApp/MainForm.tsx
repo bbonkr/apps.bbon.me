@@ -105,12 +105,12 @@ export const MainForm = ({
                 aria-label="form buttons"
                 style={{ display: 'flex' }}
             >
-                <button type="reset" className="btn btn-secondary">
+                <button type="reset" className="btn reset-button">
                     Reset
                 </button>
                 <button
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn btn-primary format-button"
                     disabled={!formState.values.json}
                 >
                     Format

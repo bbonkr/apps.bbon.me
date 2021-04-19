@@ -35,6 +35,7 @@
     "license": "MIT",
     "dependencies": {
         "@babel/runtime": "^7.13.10",
+        "@bbon/filedownload": "^1.1.2",
         "@loadable/component": "^5.14.1",
         "halfmoon": "^1.1.1",
         "prismjs": "^1.23.0",
