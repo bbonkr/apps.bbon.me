@@ -12,6 +12,7 @@ import { Position, Theme } from '../../models';
 import smoothscroll from 'smoothscroll-polyfill';
 import { Loading } from '../Loading';
 import { appModules } from '../../appModules';
+import { useNotification } from '../../hooks';
 
 const Header = AsyncComponent(() => import('../Layouts'), {
     resolveComponent: (props) => props.Header,
@@ -34,6 +35,7 @@ const PageNotFound = AsyncComponent(() => import('../PageNotFound'), {
 });
 
 export const App = () => {
+    const { requestPermission } = useNotification();
     const [scrollPosition, setScrollPosition] = useState<Position>({
         top: 0,
         left: 0,
@@ -91,6 +93,10 @@ export const App = () => {
                 .catch((err) => {
                     console.log('SW registration failed: ', err);
                 });
+
+            requestPermission().then((result) => {
+                console.info(`Notifiction ${result}`);
+            });
         };
 
         if ('serviceWorker' in navigator) {

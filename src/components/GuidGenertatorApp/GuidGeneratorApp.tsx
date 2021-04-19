@@ -3,8 +3,10 @@ import { Content } from '../Layouts';
 import { v4 as uuidv4 } from 'uuid';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from 'react-icons/fa';
+import { useNotification } from '../../hooks';
 
 export const GuidGeneratorApp = () => {
+    const { notify } = useNotification();
     const [value, setValue] = useState('');
     const [uppercase, setUppercase] = useState(true);
     const [hasBraces, setHasBraces] = useState(true);
@@ -56,6 +58,8 @@ export const GuidGeneratorApp = () => {
         console.info('new value: ', guid);
 
         setValue(guid);
+
+        notify({ title: 'Guid Generated', body: `The new guid is '${guid}'` });
     };
 
     return (
