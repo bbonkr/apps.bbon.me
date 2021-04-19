@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Content, Row } from '../Layouts';
 import { FormState, FormValueKeys } from './FormState';
+import { FaCloudDownloadAlt } from 'react-icons/fa';
 import { MainForm } from './MainForm';
 import { PrintJson } from './PrintJson';
 import validate from 'validate.js';
 import { useNotification } from '../../hooks';
+import { FileDownloadHelper } from '@bbon/filedownload';
+
+import './style.css';
 
 const constraints = {
     json: {
@@ -25,6 +29,7 @@ export const JsonFormatterApp = () => {
     });
 
     const [formattedValue, setFormattedValue] = useState('');
+    const [fileName, setFileName] = useState('');
 
     const handleMainFormChange = (name: FormValueKeys, value: string) => {
         setFormState((prevState) => ({
@@ -48,9 +53,10 @@ export const JsonFormatterApp = () => {
                 4,
             );
             setFormattedValue((_) => formattedJson);
+            setFileName((_) => `Formatted-${+new Date()}.json`);
         } catch (err) {
             setFormattedValue((_) => '');
-
+            setFileName((_) => '');
             setFormState((prevState) => ({
                 ...prevState,
                 isVaild: false,
@@ -72,6 +78,16 @@ export const JsonFormatterApp = () => {
             errors: {},
         }));
         setFormattedValue((_) => '');
+        setFileName((_) => '');
+    };
+
+    const handleClickSaveAs = () => {
+        const helper = new FileDownloadHelper();
+        helper.download({
+            data: formattedValue,
+            filename: fileName,
+            contentType: 'application/json',
+        });
     };
 
     useEffect(() => {
@@ -85,7 +101,7 @@ export const JsonFormatterApp = () => {
     }, [formState.values]);
 
     return (
-        <Content title="Json Formatter">
+        <Content title="Json Formatter" id="json-formatter-app">
             <Container>
                 <Row equalsInBetweenSpacing="sm">
                     <div className="col-sm-12">
@@ -103,6 +119,12 @@ export const JsonFormatterApp = () => {
                     <Row>
                         <div className="col-sm-12">
                             <Content>
+                                <button
+                                    className="btn"
+                                    onClick={handleClickSaveAs}
+                                >
+                                    <FaCloudDownloadAlt /> Save as {fileName}
+                                </button>
                                 <PrintJson json={formattedValue} />
                             </Content>
                         </div>

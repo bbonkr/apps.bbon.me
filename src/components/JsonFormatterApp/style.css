@@ -1,0 +1,7 @@
+#json-formatter-app .reset-button {
+    flex:1;
+}
+
+#json-formatter-app .format-button {
+    flex:4;
+}
