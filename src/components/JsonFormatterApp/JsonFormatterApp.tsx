@@ -4,6 +4,7 @@ import { FormState, FormValueKeys } from './FormState';
 import { MainForm } from './MainForm';
 import { PrintJson } from './PrintJson';
 import validate from 'validate.js';
+import { useNotification } from '../../hooks';
 
 const constraints = {
     json: {
@@ -15,6 +16,7 @@ const constraints = {
 };
 
 export const JsonFormatterApp = () => {
+    const { notify } = useNotification();
     const [formState, setFormState] = useState<FormState>({
         isVaild: false,
         values: { json: '' },
@@ -48,6 +50,7 @@ export const JsonFormatterApp = () => {
             setFormattedValue((_) => formattedJson);
         } catch (err) {
             setFormattedValue((_) => '');
+
             setFormState((prevState) => ({
                 ...prevState,
                 isVaild: false,
@@ -55,6 +58,7 @@ export const JsonFormatterApp = () => {
                     json: [`Could not format. ${err.message}`],
                 },
             }));
+            notify({ title: 'Could not format', body: `${err.message}` });
         }
     };
 
