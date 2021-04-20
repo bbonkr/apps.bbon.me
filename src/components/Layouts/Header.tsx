@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react';
 import halfmoon from 'halfmoon';
 import { FaBars } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
 import { ThemeButton } from '../ThemeButton';
-import { config } from '../../config';
 import { GitHubIssueButton, GitHubRepositoryButton } from '../GitHubButtons';
+import { GenericLink } from '../GenericLink';
+import { useConfig } from '../../hooks';
 
 export const Header = () => {
-    const location = useLocation();
-
-    const handleClickMenuItem = () => {
-        halfmoon.deactivateAllDropdownToggles();
-    };
-
+    const { title, version } = useConfig();
     const handleClickToggleSidebar = () => {
-        console.info('click toggle sidebar');
         halfmoon.toggleSidebar();
     };
 
@@ -34,14 +28,21 @@ export const Header = () => {
                     <span className="sr-only">Toggle sidebar</span>
                 </button>
             </div>
-            <a href="/" className="navbar-brand">
-                <img src="/bbon-icon.png" alt={config.title} />
-                {config.title}{' '}
-            </a>
-            {config.version && (
-                <span className="navbar-text text-monospace">
-                    {config.version}
-                </span>
+            <GenericLink
+                className="navbar-brand"
+                link={{
+                    href: '/',
+                    title: (
+                        <React.Fragment>
+                            <img src="/bbon-icon.png" alt={title} /> {title}
+                        </React.Fragment>
+                    ),
+                }}
+                disableToggleSidebar
+            />
+
+            {version && (
+                <span className="navbar-text text-monospace">{version}</span>
             )}
 
             <div className="navbar-nav ml-auto">

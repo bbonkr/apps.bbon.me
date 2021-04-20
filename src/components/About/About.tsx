@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { Card, Content } from '../Layouts';
 import { appModules } from '../../appModules';
 
+import './style.css';
+
 export const About = () => {
     return (
         <Content title="About">
-            <p>Prodvider some apps</p>
+            <p>Prodvides some apps</p>
             <div className="container-fluid">
                 <h3>PWA apps</h3>
                 <div className="row justify-content-center">
@@ -25,7 +27,7 @@ export const About = () => {
                                     )
                                 }
                             >
-                                {app.description}
+                                <p className="description">{app.description}</p>
                             </Card>
                         </div>
                     ))}

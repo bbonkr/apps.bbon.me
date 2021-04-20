@@ -8,6 +8,7 @@ export const GitHubIssueButton = () => {
             className="btn"
             href={`${config.gitHubRepositoryUrl}${config.gitHubIssueUrl}`}
             target="external"
+            aria-label="Navigate to GitHub issue"
         >
             <FaExclamationCircle />
         </a>

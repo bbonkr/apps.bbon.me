@@ -1,55 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
 import { FaInfoCircle } from 'react-icons/fa';
-import halfmoon from 'halfmoon';
 import { config } from '../../config';
 import { appModules } from '../../appModules';
+import { GenericLink } from '../GenericLink';
+import { useConfig } from '../../hooks';
 
 export const Sidebar = () => {
-    const handleClickMenuItem = (
-        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    ) => {
-        halfmoon.toggleSidebar();
-    };
+    const { title, version, description } = useConfig();
+
     return (
         <div className="sidebar">
             <div className="sidebar-menu">
-                <Link to="/" className="sidebar-brand">
-                    <img src="/bbon-icon.png" alt="Logo" />
-                    {config.title}{' '}
-                </Link>
+                <GenericLink
+                    className="sidebar-brand"
+                    link={{
+                        href: '/',
+                        title: (
+                            <React.Fragment>
+                                <img src="/bbon-icon.png" alt="Logo" /> {title}
+                            </React.Fragment>
+                        ),
+                    }}
+                />
                 <div className="sidebar-content">
-                    <p>{config.description}</p>
+                    <p>{description}</p>
                 </div>
                 <h5 className="sidebar-title">PWAs</h5>
                 <div className="sidebar-divider"></div>
 
                 {appModules.map((app) => (
-                    <Link
-                        key={app.title}
-                        to={app.linkTo ?? '/'}
+                    <GenericLink
+                        key={app.linkTo}
                         className={`sidebar-link sidebar-link-with-icon`}
-                        onClick={handleClickMenuItem}
-                    >
-                        {app.icon && (
-                            <span className="sidebar-icon">{app.icon}</span>
-                        )}
-                        {app.title}
-                    </Link>
+                        link={{
+                            href: app.linkTo ?? '/',
+                            title: (
+                                <React.Fragment>
+                                    {app.icon && (
+                                        <span className="sidebar-icon">
+                                            {app.icon}
+                                        </span>
+                                    )}
+                                    {app.title}
+                                </React.Fragment>
+                            ),
+                        }}
+                    />
                 ))}
                 <br />
                 <h5 className="sidebar-title">Information</h5>
                 <div className="sidebar-divider"></div>
-                <Link
-                    to="/about"
+                <GenericLink
                     className="sidebar-link sidebar-link-with-icon"
-                    onClick={handleClickMenuItem}
-                >
-                    <span className="sidebar-icon">
-                        <FaInfoCircle />
-                    </span>
-                    About
-                </Link>
+                    link={{
+                        href: '/about',
+                        title: (
+                            <React.Fragment>
+                                <span className="sidebar-icon">
+                                    <FaInfoCircle />
+                                </span>
+                                About
+                            </React.Fragment>
+                        ),
+                    }}
+                />
             </div>
         </div>
     );
