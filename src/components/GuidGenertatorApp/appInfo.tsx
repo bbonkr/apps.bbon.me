@@ -5,7 +5,7 @@ import { GuidGeneratorApp } from './GuidGeneratorApp';
 
 export const appInfo: AppModuleInfo = {
     title: 'Guid Generator',
-    description: <p>Generate GUID v4</p>,
+    description: 'Generate GUID v4',
     linkTo: '/guid',
     icon: <FaKey />,
     app: <GuidGeneratorApp />,

@@ -4,6 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const dotenv = require('dotenv');
+const package = require('../package.json');
 
 dotenv.config();
 
@@ -47,12 +48,18 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({ dev: !isProduction }),
         new webpack.DefinePlugin({
             GAID: JSON.stringify(process.env.GAID),
+            'app.version': JSON.stringify(package.version),
+            'app.displayName': JSON.stringify(package.displayName),
+            'app.description': JSON.stringify(package.description),
         }),
         new HtmlWebPackPlugin({
             template: 'src/index.ejs',
             filename: '../index.html',
             templateParameters: {
                 gaid: process.env.GAID,
+                title: package.displayName,
+                description: package.description,
+                version: package.version,
             },
         }),
         new CopyPlugin({
@@ -69,11 +76,13 @@ module.exports = {
             clientsClaim: true,
             skipWaiting: true,
             swDest: '../service-worker.js',
+            // directoryIndex: 'index.html',
+            // modifyURLPrefix: '/',
         }),
     ],
     output: {
         filename: '[name].js',
         path: path.join(path.resolve(__dirname, '..'), 'out', 'dist'),
-        publicPath: '/dist/',
+        publicPath: '/',
     },
 };

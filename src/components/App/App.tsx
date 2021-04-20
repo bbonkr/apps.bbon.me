@@ -75,7 +75,7 @@ export const App = () => {
             navigator.serviceWorker
                 .getRegistrations()
                 .then((registerations) => {
-                    if (registerations.length === 0) {
+                    if (!registerations || registerations.length === 0) {
                         return navigator.serviceWorker.register(
                             '/service-worker.js',
                         );
@@ -87,7 +87,9 @@ export const App = () => {
                 })
                 .then((registration) => {
                     if (registration) {
-                        console.log('SW registered: ', registration);
+                        console.log(
+                            `SW registered: ${registration}, scope: ${registration.scope} `,
+                        );
                     }
                 })
                 .catch((err) => {
