@@ -1,30 +1,47 @@
 import React from 'react';
-import { Link } from '../../models';
+import { Link as LinkModel } from '../../models';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import halfmoon from 'halfmoon';
+import { Link } from 'react-router-dom';
 
 interface GenericLinkProps {
-    record: Link;
+    link: LinkModel;
     className?: string;
+    disableToggleSidebar?: boolean;
+    disableToggleDropdown?: boolean;
 }
 
-export const GenericLink = ({ record, className }: GenericLinkProps) => {
+export const GenericLink = ({
+    link,
+    className,
+    disableToggleSidebar,
+    disableToggleDropdown,
+}: GenericLinkProps) => {
     const handleClick = () => {
-        halfmoon.deactivateAllDropdownToggles();
+        if (!disableToggleDropdown) {
+            halfmoon.deactivateAllDropdownToggles();
+        }
+        if (!disableToggleSidebar) {
+            halfmoon.toggleSidebar();
+        }
     };
 
-    return (
+    return link.href.startsWith('/') ? (
+        <Link to={link.href} onClick={handleClick} className={className ?? ''}>
+            {link.title}
+        </Link>
+    ) : (
         <a
             className={`d-flex flex-row flex-justify-center flex-align-baseline ${
                 className ?? ''
             }`}
-            href={record.href}
-            target={record.target || '_blank'}
+            href={link.href}
+            target={link.target || '_blank'}
             onClick={handleClick}
         >
-            {record.icon && <span className="mr-5">{record.icon} </span>}
-            <span className="mr-5">{record.title}</span>
-            {(!record.target || record.target !== '_self') && (
+            {link.icon && <span className="mr-5">{link.icon} </span>}
+            <span className="mr-5">{link.title}</span>
+            {(!link.target || link.target !== '_self') && (
                 <span>
                     <FaExternalLinkAlt />
                 </span>

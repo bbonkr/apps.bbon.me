@@ -1,7 +1,7 @@
 {
     "name": "apps.bbon.me",
-    "displayName": "apps.bbon.me",
-    "version": "0.1.0",
+    "displayName": "Apps",
+    "version": "0.2.0",
     "description": "PWA apps.bbon.me",
     "main": "out/dist/app.js",
     "keywords": [

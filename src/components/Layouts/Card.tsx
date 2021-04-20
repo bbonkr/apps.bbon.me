@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import { Content } from './Content';
 
 interface FeaturedImage {
     imageUri: string;
@@ -37,7 +38,9 @@ export const Card = ({
                     <h2 className="card-title font-size-18 m-0">{title}</h2>
                 </div>
             )}
-            <div className="content">{children}</div>
+
+            <Content>{children}</Content>
+
             {footer && (
                 <div className="px-card py-10 bg-light-lm bg-very-dark-dm rounded-bottom">
                     {footer}

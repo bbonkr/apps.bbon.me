@@ -5,7 +5,7 @@ import { JsonFormatterApp } from './JsonFormatterApp';
 
 export const appInfo: AppModuleInfo = {
     title: 'Json Formatter',
-    description: <p>Easy to read json formatter</p>,
+    description: 'Easy to read json formatter.',
     linkTo: '/json-formatter',
     icon: <FaQuoteLeft />,
     app: <JsonFormatterApp />,

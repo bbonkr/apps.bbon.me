@@ -40,7 +40,7 @@ export const Footer = ({ onClickScrollToTop }: FooterProps) => {
                                 <GenericLink
                                     key={link.href}
                                     className="dropdown-item"
-                                    record={link}
+                                    link={link}
                                 />
                             ))}
                         </div>
