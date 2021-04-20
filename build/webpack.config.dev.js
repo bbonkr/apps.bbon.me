@@ -23,7 +23,7 @@ module.exports = {
         hot: true,
         hotOnly: true,
         inline: true,
-        publicPath: '/',
+        publicPath: '/dist/',
         watchContentBase: true,
         writeToDisk: true,
     },
