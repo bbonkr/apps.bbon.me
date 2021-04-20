@@ -9,7 +9,11 @@ export const ThemeButton = () => {
     };
 
     return (
-        <button className="btn" onClick={handleToggleDarkmode}>
+        <button
+            className="btn"
+            onClick={handleToggleDarkmode}
+            aria-label="Toggle site theme"
+        >
             <FaMoon />
         </button>
     );
