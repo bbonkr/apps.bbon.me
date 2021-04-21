@@ -1,12 +1,11 @@
 import React from 'react';
 import { FaInfoCircle } from 'react-icons/fa';
-import { config } from '../../config';
 import { appModules } from '../../appModules';
 import { GenericLink } from '../GenericLink';
-import { useConfig } from '../../hooks';
+import { config } from '../../config';
 
 export const Sidebar = () => {
-    const { title, version, description } = useConfig();
+    const { title, version, description } = config;
 
     return (
         <div className="sidebar">
