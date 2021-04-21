@@ -47,20 +47,17 @@ module.exports = {
     plugins: [
         new webpack.LoaderOptionsPlugin({ dev: !isProduction }),
         new webpack.DefinePlugin({
-            GAID: JSON.stringify(process.env.GAID),
-            'app.version': JSON.stringify(package.version),
-            'app.displayName': JSON.stringify(package.displayName),
-            'app.description': JSON.stringify(package.description),
+            'process.env': {
+                GAID: JSON.stringify(process.env.GAID),
+                VERSION: JSON.stringify(package.version),
+                TITLE: JSON.stringify(package.displayName),
+                DESCRIPTION: JSON.stringify(package.description),
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+            },
         }),
         new HtmlWebPackPlugin({
             template: 'src/index.ejs',
             filename: '../index.html',
-            templateParameters: {
-                gaid: process.env.GAID,
-                title: package.displayName,
-                description: package.description,
-                version: package.version,
-            },
         }),
         new CopyPlugin({
             patterns: [

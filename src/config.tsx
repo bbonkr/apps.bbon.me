@@ -3,10 +3,12 @@ import { Config } from './models';
 import { FaBlog, FaGithub, FaFacebook, FaTwitter } from 'react-icons/fa';
 
 export const config: Config = {
-    title: 'Apps',
+    title: process.env.TITLE ?? '',
     gitHubRepositoryUrl: 'https://github.com/bbonkr/apps.bbon.me',
     gitHubIssueUrl: '/issues',
-    version: 'v0.1.0',
+    version: process.env.VERSION ?? 'v1.0.0',
+    description: process.env.DESCRIPTION,
+    googleAnalyticsTraceId: process.env.GAID,
     author: {
         name: 'bbon',
         email: 'dev@bbon.kr',
