@@ -6,6 +6,13 @@ export const ThemeButton = () => {
     const handleToggleDarkmode = () => {
         halfmoon.toggleDarkMode();
         halfmoon.deactivateAllDropdownToggles();
+
+        const theme = halfmoon.readCookie('halfmoon_preferredMode');
+
+        gtag('event', 'set_theme', {
+            theme: theme ?? 'light-mode',
+            debug_mode: process.env.NODE_ENV !== 'production',
+        });
     };
 
     return (

@@ -14,4 +14,5 @@ export interface Config {
     version?: string;
     author: Author;
     contacts?: Link[];
+    googleAnalyticsTraceId?: string;
 }

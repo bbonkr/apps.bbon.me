@@ -4,10 +4,10 @@ import { FaBars } from 'react-icons/fa';
 import { ThemeButton } from '../ThemeButton';
 import { GitHubIssueButton, GitHubRepositoryButton } from '../GitHubButtons';
 import { GenericLink } from '../GenericLink';
-import { useConfig } from '../../hooks';
+import { config } from '../../config';
 
 export const Header = () => {
-    const { title, version } = useConfig();
+    const { title, version } = config;
     const handleClickToggleSidebar = () => {
         halfmoon.toggleSidebar();
     };

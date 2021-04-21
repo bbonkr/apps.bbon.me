@@ -13,6 +13,8 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { Loading } from '../Loading';
 import { appModules } from '../../appModules';
 import { useNotification } from '../../hooks';
+import { Helmet } from 'react-helmet';
+import { config } from '../../config';
 
 const Header = AsyncComponent(() => import('../Layouts'), {
     resolveComponent: (props) => props.Header,
@@ -35,6 +37,8 @@ const PageNotFound = AsyncComponent(() => import('../PageNotFound'), {
 });
 
 export const App = () => {
+    const { googleAnalyticsTraceId, title } = config;
+    console.info('google analytics tract id', googleAnalyticsTraceId);
     const { requestPermission } = useNotification();
     const [scrollPosition, setScrollPosition] = useState<Position>({
         top: 0,
@@ -101,7 +105,10 @@ export const App = () => {
             });
         };
 
-        if ('serviceWorker' in navigator) {
+        if (
+            process.env.NODE_ENV === 'production' &&
+            'serviceWorker' in navigator
+        ) {
             window.addEventListener('load', handleWindowLoad);
         }
 
@@ -113,48 +120,58 @@ export const App = () => {
     }, []);
 
     return (
-        <Router>
-            {theme ? (
-                <MainLayout
-                    withNavbar
-                    withNavbarFixedBottom
-                    withSidebar
-                    sidebarType={['overlayed-all']}
-                >
-                    <Sidebar />
-                    <Header />
-                    <ContentWrapper scrollPosition={scrollPosition}>
-                        <Switch>
-                            {appModules.map((app) => (
-                                <Route key={app.title} path={app.linkTo} exact>
-                                    {app.app}
-                                </Route>
-                            ))}
+        <React.Fragment>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
 
-                            <Route path="/about" exact>
-                                <About />
-                            </Route>
-                            <Route path="/404" exact>
-                                <PageNotFound />
-                            </Route>
-                            <Route
-                                path="*"
-                                render={(props) => (
-                                    <Redirect
-                                        to={{
-                                            pathname: '/404',
-                                            state: { from: props.location },
-                                        }}
-                                    />
-                                )}
-                            ></Route>
-                        </Switch>
-                    </ContentWrapper>
-                    <Footer onClickScrollToTop={handleClickScrollTop} />
-                </MainLayout>
-            ) : (
-                <Loading />
-            )}
-        </Router>
+            <Router>
+                {theme ? (
+                    <MainLayout
+                        withNavbar
+                        withNavbarFixedBottom
+                        withSidebar
+                        sidebarType={['overlayed-all']}
+                    >
+                        <Sidebar />
+                        <Header />
+                        <ContentWrapper scrollPosition={scrollPosition}>
+                            <Switch>
+                                {appModules.map((app) => (
+                                    <Route
+                                        key={app.title}
+                                        path={app.linkTo}
+                                        exact
+                                    >
+                                        {app.app}
+                                    </Route>
+                                ))}
+
+                                <Route path="/about" exact>
+                                    <About />
+                                </Route>
+                                <Route path="/404" exact>
+                                    <PageNotFound />
+                                </Route>
+                                <Route
+                                    path="*"
+                                    render={(props) => (
+                                        <Redirect
+                                            to={{
+                                                pathname: '/404',
+                                                state: { from: props.location },
+                                            }}
+                                        />
+                                    )}
+                                ></Route>
+                            </Switch>
+                        </ContentWrapper>
+                        <Footer onClickScrollToTop={handleClickScrollTop} />
+                    </MainLayout>
+                ) : (
+                    <Loading />
+                )}
+            </Router>
+        </React.Fragment>
     );
 };
