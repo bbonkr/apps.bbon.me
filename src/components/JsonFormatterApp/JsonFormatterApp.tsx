@@ -9,6 +9,7 @@ import { useNotification } from '../../hooks';
 import { FileDownloadHelper } from '@bbon/filedownload';
 
 import './style.css';
+import { Helmet } from 'react-helmet';
 
 const constraints = {
     json: {
@@ -20,6 +21,7 @@ const constraints = {
 };
 
 export const JsonFormatterApp = () => {
+    const title = 'Json Formatter';
     const { notify } = useNotification();
     const [formState, setFormState] = useState<FormState>({
         isVaild: false,
@@ -101,7 +103,10 @@ export const JsonFormatterApp = () => {
     }, [formState.values]);
 
     return (
-        <Content title="Json Formatter" id="json-formatter-app">
+        <Content title={title} id="json-formatter-app">
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <Container>
                 <Row equalsInBetweenSpacing="sm">
                     <div className="col-sm-12">
