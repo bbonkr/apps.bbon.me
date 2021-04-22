@@ -2,12 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Content } from '../Layouts';
 import { appModules } from '../../appModules';
+import { Helmet } from 'react-helmet';
 
 import './style.css';
 
 export const About = () => {
+    const title = 'About';
+
     return (
-        <Content title="About">
+        <Content title={About}>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <p>Prodvides some apps</p>
             <div className="container-fluid">
                 <h3>PWA apps</h3>

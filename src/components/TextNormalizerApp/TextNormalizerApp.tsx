@@ -5,8 +5,10 @@ import { Card, Container, Content, Row } from '../Layouts';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import './style.css';
+import { Helmet } from 'react-helmet';
 
 export const TextNormalizerApp = () => {
+    const title = 'Text Normalizer';
     const [text, setText] = useState('');
     const [isCopied, setIsCopied] = useState(false);
     const replacedParagraph = useRef<HTMLPreElement>(null);
@@ -38,7 +40,10 @@ export const TextNormalizerApp = () => {
     }, [text]);
 
     return (
-        <Content title="Text Normalizer">
+        <Content title={title}>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <Container>
                 <Row equalsInBetweenSpacing="sm">
                     <div className="col-sm-12">
@@ -57,7 +62,7 @@ export const TextNormalizerApp = () => {
                     </div>
                 </Row>
                 {!text ? (
-                    <React.Fragment></React.Fragment>
+                    <hr />
                 ) : verifyResults.filter((x) => x.hit).length > 0 ? (
                     <Card title="⚠ Warnings" useTitleBorder>
                         <div>

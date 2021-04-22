@@ -4,8 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from 'react-icons/fa';
 import { useNotification } from '../../hooks';
+import { Helmet } from 'react-helmet';
 
 export const GuidGeneratorApp = () => {
+    const title = 'Guid Generator';
     const { notify } = useNotification();
     const [value, setValue] = useState('');
     const [uppercase, setUppercase] = useState(true);
@@ -63,7 +65,10 @@ export const GuidGeneratorApp = () => {
     };
 
     return (
-        <Content title="Guid Generator">
+        <Content title={title}>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <div className="container-fluid ">
                 <div className="row row-eq-spacing-sm justify-content-center">
                     <div className="col-lg-6">
