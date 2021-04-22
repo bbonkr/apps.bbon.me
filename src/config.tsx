@@ -6,7 +6,7 @@ export const config: Config = {
     title: process.env.TITLE ?? '',
     gitHubRepositoryUrl: 'https://github.com/bbonkr/apps.bbon.me',
     gitHubIssueUrl: '/issues',
-    version: process.env.VERSION ?? 'v1.0.0',
+    version: `v${process.env.VERSION || '1.0.0'}`,
     description: process.env.DESCRIPTION,
     googleAnalyticsTraceId: process.env.GAID,
     author: {

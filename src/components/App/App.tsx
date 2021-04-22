@@ -7,7 +7,13 @@ import {
 } from 'react-router-dom';
 import halfmoon from 'halfmoon';
 import { AsyncComponent, LoadingComponent } from '../AsyncComponent';
-import { MainLayout, ContentWrapper, Footer, Sidebar } from '../Layouts';
+import {
+    MainLayout,
+    ContentWrapper,
+    Footer,
+    Sidebar,
+    GoogleAnalyticsProviderWithRouter,
+} from '../Layouts';
 import { Position, Theme } from '../../models';
 import smoothscroll from 'smoothscroll-polyfill';
 import { Loading } from '../Loading';
@@ -21,10 +27,10 @@ const Header = AsyncComponent(() => import('../Layouts'), {
     fallback: <LoadingComponent />,
 });
 
-const StringNormalizer = AsyncComponent(() => import('../TextNormalizerApp'), {
-    resolveComponent: (props) => props.TextNormalizerApp,
-    fallback: <LoadingComponent />,
-});
+// const StringNormalizer = AsyncComponent(() => import('../TextNormalizerApp'), {
+//     resolveComponent: (props) => props.TextNormalizerApp,
+//     fallback: <LoadingComponent />,
+// });
 
 const About = AsyncComponent(() => import('../About'), {
     resolveComponent: (props) => props.About,
@@ -37,14 +43,14 @@ const PageNotFound = AsyncComponent(() => import('../PageNotFound'), {
 });
 
 export const App = () => {
-    const { googleAnalyticsTraceId, title } = config;
-    console.info('google analytics tract id', googleAnalyticsTraceId);
+    const { googleAnalyticsTraceId, title, version } = config;
+
     const { requestPermission } = useNotification();
     const [scrollPosition, setScrollPosition] = useState<Position>({
         top: 0,
         left: 0,
     });
-    const [theme, setTheme] = useState<Theme>(undefined);
+
     const handleClickScrollTop = () => {
         setScrollPosition((prevState) => ({
             ...prevState,
@@ -54,26 +60,8 @@ export const App = () => {
     };
 
     useEffect(() => {
-        const bodyEl = document.querySelector('body');
-
-        if (bodyEl) {
-            bodyEl.setAttribute(
-                'class',
-                'with-custom-webkit-scrollbars with-custom-css-scrollbars',
-            );
-            bodyEl.setAttribute('data-set-preferred-theme-onload', 'true');
-        }
-
         halfmoon.onDOMContentLoaded();
         smoothscroll.polyfill();
-
-        const currentTheme = halfmoon.readCookie('halfmoon_preferredMode');
-        console.info('halfmoon_preferredMode: ', currentTheme);
-        setTheme((_) => (currentTheme as Theme) ?? 'light-mode');
-
-        if (currentTheme === 'dark-mode' && halfmoon.darkModeOn === 'no') {
-            halfmoon.toggleDarkMode();
-        }
 
         const handleWindowLoad = () => {
             navigator.serviceWorker
@@ -121,12 +109,20 @@ export const App = () => {
 
     return (
         <React.Fragment>
-            <Helmet>
-                <title>{title}</title>
+            <Helmet titleTemplate={`%s | ${title} ${version}`}>
+                <body
+                    data-set-preferred-mode-onload="true"
+                    className="with-custom-webkit-scrollbars with-custom-css-scrollbars"
+                    data-dm-shortcut-enabled="true"
+                    data-sidebar-shortcut-enabled="true"
+                />
+                <title>Home</title>
             </Helmet>
 
             <Router>
-                {theme ? (
+                <GoogleAnalyticsProviderWithRouter
+                    googleAnalyticsId={googleAnalyticsTraceId}
+                >
                     <MainLayout
                         withNavbar
                         withNavbarFixedBottom
@@ -159,7 +155,9 @@ export const App = () => {
                                         <Redirect
                                             to={{
                                                 pathname: '/404',
-                                                state: { from: props.location },
+                                                state: {
+                                                    from: props.location,
+                                                },
                                             }}
                                         />
                                     )}
@@ -168,9 +166,7 @@ export const App = () => {
                         </ContentWrapper>
                         <Footer onClickScrollToTop={handleClickScrollTop} />
                     </MainLayout>
-                ) : (
-                    <Loading />
-                )}
+                </GoogleAnalyticsProviderWithRouter>
             </Router>
         </React.Fragment>
     );
