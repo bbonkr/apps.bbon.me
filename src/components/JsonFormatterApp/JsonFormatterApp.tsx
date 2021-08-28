@@ -1,33 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Content, Row } from '../Layouts';
-import { FormState, FormValueKeys } from './FormState';
+import { FormState, FormValue, FormValueKeys } from './FormState';
 import { FaCloudDownloadAlt } from 'react-icons/fa';
 import { MainForm } from './MainForm';
 import { PrintJson } from './PrintJson';
-import validate from 'validate.js';
 import { useNotification } from '../../hooks';
 import { FileDownloadHelper } from '@bbon/filedownload';
+import { Helmet } from 'react-helmet';
+import Joi from 'joi';
 
 import './style.css';
-import { Helmet } from 'react-helmet';
 
-const constraints = {
-    json: {
-        presence: {
-            allowEmpty: false,
-            message: '^Raw JSON is required.',
-        },
-    },
-};
+const schema = Joi.object<FormValue>({
+    json: Joi.string().required(),
+});
 
 export const JsonFormatterApp = () => {
     const title = 'Json Formatter';
     const { notify } = useNotification();
-    const [formState, setFormState] = useState<FormState>({
-        isVaild: false,
-        values: { json: '' },
-        touches: {},
-        errors: {},
+    const [formState, setFormState] = useState<FormState>(() => {
+        const initialValue: FormState = {};
+        return initialValue;
     });
 
     const [formattedValue, setFormattedValue] = useState('');
@@ -50,7 +43,7 @@ export const JsonFormatterApp = () => {
     const handleFormat = () => {
         try {
             const formattedJson = JSON.stringify(
-                JSON.parse(formState.values.json),
+                JSON.parse(formState.values?.json ?? ''),
                 null,
                 4,
             );
@@ -63,7 +56,7 @@ export const JsonFormatterApp = () => {
                 ...prevState,
                 isVaild: false,
                 errors: {
-                    json: [`Could not format. ${err.message}`],
+                    json: `Could not format. ${err.message}`,
                 },
             }));
             notify({ title: 'Could not format', body: `${err.message}` });
@@ -71,14 +64,7 @@ export const JsonFormatterApp = () => {
     };
 
     const handleReset = () => {
-        setFormState((prevState) => ({
-            ...prevState,
-            values: {
-                json: '',
-            },
-            touches: {},
-            errors: {},
-        }));
+        setFormState((_) => ({}));
         setFormattedValue((_) => '');
         setFileName((_) => '');
     };
@@ -93,13 +79,34 @@ export const JsonFormatterApp = () => {
     };
 
     useEffect(() => {
-        const errors = validate(formState.values, constraints);
-        console.info('error', errors);
-        setFormState((prevState) => ({
-            ...prevState,
-            isVaild: !errors,
-            errors: errors,
-        }));
+        const { error } = schema.validate(formState.values);
+
+        setFormState((prevState) => {
+            let newState: FormState = {
+                ...prevState,
+                isVaild: !error,
+            };
+
+            if (error) {
+                error.details.forEach((detail) => {
+                    const path = detail.path.find((_, index) => index === 0);
+                    if (path) {
+                        const name = path as FormValueKeys;
+                        if (name) {
+                            newState = {
+                                ...newState,
+                                errors: {
+                                    ...(newState.errors ?? {}),
+                                    [name]: detail.message,
+                                },
+                            };
+                        }
+                    }
+                });
+            }
+
+            return newState;
+        });
     }, [formState.values]);
 
     return (

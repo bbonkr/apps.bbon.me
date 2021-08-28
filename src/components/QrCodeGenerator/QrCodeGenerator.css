@@ -1,0 +1,17 @@
+#qr-code-generator form>div:last-child {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.8rem;
+}
+
+#qr-code-generator form>div:last-child button {
+    flex: 1;
+}
+
+#qr-code-generator .uppercase {
+    text-transform: uppercase;
+}
+
+#qr-code-generator .cursor-pointer {
+    cursor: pointer;
+}
