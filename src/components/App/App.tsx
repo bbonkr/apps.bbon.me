@@ -16,7 +16,6 @@ import {
 } from '../Layouts';
 import { Position, Theme } from '../../models';
 import smoothscroll from 'smoothscroll-polyfill';
-import { Loading } from '../Loading';
 import { appModules } from '../../appModules';
 import { useNotification } from '../../hooks';
 import { Helmet } from 'react-helmet';
