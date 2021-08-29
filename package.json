@@ -1,7 +1,7 @@
 {
     "name": "apps.bbon.me",
     "displayName": "Apps",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "PWA apps.bbon.me",
     "main": "out/dist/app.js",
     "keywords": [
@@ -48,8 +48,7 @@
         "react-icons": "^4.2.0",
         "react-router-dom": "^5.2.0",
         "smoothscroll-polyfill": "^0.4.4",
-        "uuid": "^3.4.0",
-        "validate.js": "^0.13.1"
+        "uuid": "^3.4.0"
     },
     "devDependencies": {
         "@babel/core": "^7.13.15",

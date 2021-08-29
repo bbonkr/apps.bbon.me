@@ -101,6 +101,19 @@ export const QrCodeGenerator = () => {
                     },
                 }));
                 break;
+            case 3:
+                setFormState((prevState) => ({
+                    ...prevState,
+                    values: {
+                        ...prevState.values,
+                        text: `mailto:dev@bbon.kr`,
+                    },
+                    touched: {
+                        ...prevState.touched,
+                        text: true,
+                    },
+                }));
+                break;
             default:
                 break;
         }
@@ -314,7 +327,7 @@ export const QrCodeGenerator = () => {
                                 I want to make a call to 010-1234-1234 when has
                                 taken qr code image with camera.
                             </p>
-                            <pre>tel://01012341234</pre>
+                            <pre>tel:01012341234</pre>
                         </div>
 
                         <div
@@ -327,6 +340,18 @@ export const QrCodeGenerator = () => {
                                 when has taken qr code image with camera.
                             </p>
                             <pre>https://resume.bbon.me</pre>
+                        </div>
+
+                        <div
+                            className="cursor-pointer"
+                            onClick={handleClickSample(3)}
+                            title="Fill sample text when clicked"
+                        >
+                            <p>
+                                I want to write mail to dev@bbon.kr when has
+                                taken qr code image with camera.
+                            </p>
+                            <pre>mailto:dev@bbon.kr</pre>
                         </div>
                     </div>
                 </Row>
