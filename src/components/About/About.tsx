@@ -10,35 +10,43 @@ export const About = () => {
     const title = 'About';
 
     return (
-        <Content title={About}>
+        <React.Fragment>
             <Helmet>
                 <title>{title}</title>
             </Helmet>
-            <p>Prodvides some apps</p>
-            <div className="container-fluid">
-                <h3>PWA apps</h3>
-                <div className="row">
-                    {appModules.map((app) => (
-                        <div
-                            key={app.title}
-                            className="col-sm-6 col-md-5 col-lg-4"
-                        >
-                            <Card
-                                title={app.title}
-                                footer={
-                                    app.linkTo && (
-                                        <Link to={app.linkTo} className="btn">
-                                            Navigate to app
-                                        </Link>
-                                    )
-                                }
+
+            <Content title={title}>
+                <p>Prodvides some apps</p>
+                <div className="container-fluid">
+                    <h3>PWA apps</h3>
+                    <div className="row">
+                        {appModules.map((app) => (
+                            <div
+                                key={app.title}
+                                className="col-sm-6 col-md-5 col-lg-4"
                             >
-                                <p className="description">{app.description}</p>
-                            </Card>
-                        </div>
-                    ))}
+                                <Card
+                                    title={app.title}
+                                    footer={
+                                        app.linkTo && (
+                                            <Link
+                                                to={app.linkTo}
+                                                className="btn"
+                                            >
+                                                Navigate to app
+                                            </Link>
+                                        )
+                                    }
+                                >
+                                    <p className="description">
+                                        {app.description}
+                                    </p>
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </Content>
+            </Content>
+        </React.Fragment>
     );
 };

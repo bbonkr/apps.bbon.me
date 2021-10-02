@@ -20,8 +20,10 @@ export const Content = ({
             style={{ ...(style ?? {}) }}
             id={id}
         >
-            {title && <h2 className="content-title">{title}</h2>}
-            {children}
+            <React.Fragment>
+                {title && <h2 className="content-title">{title}</h2>}
+                {children}
+            </React.Fragment>
         </div>
     );
 };

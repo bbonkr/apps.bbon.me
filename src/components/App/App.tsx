@@ -139,12 +139,13 @@ export const App = () => {
                                     </Route>
                                 ))}
 
-                                <Route path="/about" exact>
-                                    <About />
-                                </Route>
-                                <Route path="/404" exact>
-                                    <PageNotFound />
-                                </Route>
+                                <Route path="/about" exact component={About} />
+                                <Route
+                                    path="/404"
+                                    exact
+                                    component={PageNotFound}
+                                />
+
                                 <Route
                                     path="*"
                                     render={(props) => (
