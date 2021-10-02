@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from 'react-icons/fa';
 import { useNotification } from '../../hooks';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export const GuidGeneratorApp = () => {
     const title = 'Guid Generator';

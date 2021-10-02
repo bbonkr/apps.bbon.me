@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 interface GoogleAnalyticsProviderProps {

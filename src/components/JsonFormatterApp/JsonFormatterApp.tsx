@@ -6,7 +6,7 @@ import { MainForm } from './MainForm';
 import { PrintJson } from './PrintJson';
 import { useNotification } from '../../hooks';
 import { FileDownloadHelper } from '@bbon/filedownload';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import Joi from 'joi';
 
 import './style.css';
@@ -50,16 +50,18 @@ export const JsonFormatterApp = () => {
             setFormattedValue((_) => formattedJson);
             setFileName((_) => `Formatted-${+new Date()}.json`);
         } catch (err) {
+            const message = (err as Error)?.message ?? err;
+
             setFormattedValue((_) => '');
             setFileName((_) => '');
             setFormState((prevState) => ({
                 ...prevState,
                 isVaild: false,
                 errors: {
-                    json: `Could not format. ${err.message}`,
+                    json: `Could not format. ${message}`,
                 },
             }));
-            notify({ title: 'Could not format', body: `${err.message}` });
+            notify({ title: 'Could not format', body: `${message}` });
         }
     };
 
