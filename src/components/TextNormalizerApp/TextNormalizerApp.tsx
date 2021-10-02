@@ -3,9 +3,9 @@ import { FaRegCopy } from 'react-icons/fa';
 import { useStringReplaceModule } from '../../hooks';
 import { Card, Container, Content, Row } from '../Layouts';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Helmet } from 'react-helmet-async';
 
 import './style.css';
-import { Helmet } from 'react-helmet';
 
 export const TextNormalizerApp = () => {
     const title = 'Text Normalizer';

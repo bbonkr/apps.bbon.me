@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {
     HashRouter as Router,
     Switch,
@@ -14,22 +15,16 @@ import {
     Sidebar,
     GoogleAnalyticsProviderWithRouter,
 } from '../Layouts';
-import { Position, Theme } from '../../models';
+import { Position } from '../../models';
 import smoothscroll from 'smoothscroll-polyfill';
 import { appModules } from '../../appModules';
 import { useNotification } from '../../hooks';
-import { Helmet } from 'react-helmet';
 import { config } from '../../config';
 
 const Header = AsyncComponent(() => import('../Layouts'), {
     resolveComponent: (props) => props.Header,
     fallback: <LoadingComponent />,
 });
-
-// const StringNormalizer = AsyncComponent(() => import('../TextNormalizerApp'), {
-//     resolveComponent: (props) => props.TextNormalizerApp,
-//     fallback: <LoadingComponent />,
-// });
 
 const About = AsyncComponent(() => import('../About'), {
     resolveComponent: (props) => props.About,
@@ -40,6 +35,8 @@ const PageNotFound = AsyncComponent(() => import('../PageNotFound'), {
     resolveComponent: (props) => props.PageNotFound,
     fallback: <LoadingComponent />,
 });
+
+const helmetContext = {};
 
 export const App = () => {
     const { googleAnalyticsTraceId, title, version } = config;
@@ -107,7 +104,7 @@ export const App = () => {
     }, []);
 
     return (
-        <React.Fragment>
+        <HelmetProvider context={helmetContext}>
             <Helmet titleTemplate={`%s | ${title} ${version}`}>
                 <body
                     data-set-preferred-mode-onload="true"
@@ -142,12 +139,13 @@ export const App = () => {
                                     </Route>
                                 ))}
 
-                                <Route path="/about" exact>
-                                    <About />
-                                </Route>
-                                <Route path="/404" exact>
-                                    <PageNotFound />
-                                </Route>
+                                <Route path="/about" exact component={About} />
+                                <Route
+                                    path="/404"
+                                    exact
+                                    component={PageNotFound}
+                                />
+
                                 <Route
                                     path="*"
                                     render={(props) => (
@@ -167,6 +165,6 @@ export const App = () => {
                     </MainLayout>
                 </GoogleAnalyticsProviderWithRouter>
             </Router>
-        </React.Fragment>
+        </HelmetProvider>
     );
 };

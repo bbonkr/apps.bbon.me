@@ -7,7 +7,8 @@ export const GitHubRepositoryButton = () => {
         <a
             className="btn"
             href={config.gitHubRepositoryUrl}
-            target="external"
+            target="_blank"
+            rel="noreferrer"
             aria-label="Navigate to GitHub repository"
         >
             <FaGithub />

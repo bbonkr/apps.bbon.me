@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Content, Row } from '../Layouts';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import Joi from 'joi';
 import QrCode, { QRCodeToDataURLOptions } from 'qrcode';
 
@@ -126,7 +126,7 @@ export const QrCodeGenerator = () => {
 
         if (!error) {
             setDataUrl((_) => undefined);
-            var opts: QRCodeToDataURLOptions = {
+            const opts: QRCodeToDataURLOptions = {
                 errorCorrectionLevel: 'H',
                 type: 'image/png',
                 // quality: 0.3,

@@ -46,12 +46,20 @@
                 "@typescript-eslint"
             ],
             "rules": {
-                "@typescript-eslint/explicit-module-boundary-types":{
-                    "allowArgumentsExplicitlyTypedAsAny": true,
-                    "allowDirectConstAssertionInArrowFunctions": true,
-                    "allowHigherOrderFunctions":true,
-                    "allowTypedFunctionExpressions": true
-                }
+                "no-unused-vars": "off",
+                "@typescript-eslint/no-unused-vars": [
+                    "warn",
+                    {
+                        "args": "after-used",
+                        "argsIgnorePattern": "^_",
+                        "caughtErrorsIgnorePattern": "^_"
+                    }
+                ],
+                "@typescript-eslint/explicit-module-boundary-types":"off",
+                "react/prop-types":"off",
+                "@typescript-eslint/no-empty-interface": [
+                    "off"
+                ]
             }
         }
     ]

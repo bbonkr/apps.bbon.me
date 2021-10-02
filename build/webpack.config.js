@@ -47,12 +47,14 @@ module.exports = {
     plugins: [
         new webpack.LoaderOptionsPlugin({ dev: !isProduction }),
         new webpack.DefinePlugin({
-            'process.env': {
-                GAID: JSON.stringify(process.env.GAID),
-                VERSION: JSON.stringify(package.version),
-                TITLE: JSON.stringify(package.displayName),
-                DESCRIPTION: JSON.stringify(package.description),
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+            process: {
+                env: {
+                    GAID: JSON.stringify(process.env.GAID),
+                    VERSION: JSON.stringify(package.version),
+                    TITLE: JSON.stringify(package.displayName),
+                    DESCRIPTION: JSON.stringify(package.description),
+                    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                },
             },
         }),
         new HtmlWebPackPlugin({
