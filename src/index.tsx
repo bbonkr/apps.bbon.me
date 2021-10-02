@@ -4,9 +4,13 @@ import { App } from './components/App';
 
 import 'halfmoon/css/halfmoon.min.css';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    document.querySelector('#app'),
-);
+const element = document.querySelector('#app');
+
+if (element) {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        element,
+    );
+}
