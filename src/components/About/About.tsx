@@ -17,7 +17,7 @@ export const About = () => {
             <p>Prodvides some apps</p>
             <div className="container-fluid">
                 <h3>PWA apps</h3>
-                <div className="row justify-content-center">
+                <div className="row">
                     {appModules.map((app) => (
                         <div
                             key={app.title}

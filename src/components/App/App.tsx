@@ -26,11 +26,6 @@ const Header = AsyncComponent(() => import('../Layouts'), {
     fallback: <LoadingComponent />,
 });
 
-// const StringNormalizer = AsyncComponent(() => import('../TextNormalizerApp'), {
-//     resolveComponent: (props) => props.TextNormalizerApp,
-//     fallback: <LoadingComponent />,
-// });
-
 const About = AsyncComponent(() => import('../About'), {
     resolveComponent: (props) => props.About,
     fallback: <LoadingComponent />,

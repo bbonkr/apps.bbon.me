@@ -36,7 +36,8 @@ export const GenericLink = ({
                 className ?? ''
             }`}
             href={link.href}
-            target={link.target || '_blank'}
+            target={link.target ?? '_blank'}
+            rel={!link.target || link.target === '_blank' ? 'noreferrer' : ''}
             onClick={handleClick}
         >
             {link.icon && <span className="mr-5">{link.icon} </span>}

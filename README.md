@@ -7,3 +7,4 @@ Web app provides feature below.
 * Text normalizer
 * Guid generator
 * Json Formatter
+* QR Code image generator
