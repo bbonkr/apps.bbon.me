@@ -75,13 +75,13 @@ export const App = () => {
                 })
                 .then((registration) => {
                     if (registration) {
-                        console.log(
+                        console.info(
                             `SW registered: ${registration}, scope: ${registration.scope} `,
                         );
                     }
                 })
                 .catch((err) => {
-                    console.log('SW registration failed: ', err);
+                    console.info('SW registration failed: ', err);
                 });
 
             requestPermission().then((result) => {
@@ -89,10 +89,7 @@ export const App = () => {
             });
         };
 
-        if (
-            process.env.NODE_ENV === 'production' &&
-            'serviceWorker' in navigator
-        ) {
+        if (process.env.ENV === 'production' && 'serviceWorker' in navigator) {
             window.addEventListener('load', handleWindowLoad);
         }
 

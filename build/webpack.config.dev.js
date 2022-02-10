@@ -3,6 +3,7 @@ const path = require('path');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const baseConfig = require('./webpack.config');
 
+/** @type { import('webpack').Configuration } */
 module.exports = {
     ...baseConfig,
     mode: 'development',
@@ -17,14 +18,14 @@ module.exports = {
     ],
     devServer: {
         port: 3000,
-        host: '0.0.0.0',
-        contentBase: path.resolve('out'),
         historyApiFallback: true,
         hot: true,
-        hotOnly: true,
-        inline: true,
-        publicPath: '/dist/',
-        watchContentBase: true,
-        writeToDisk: true,
+        liveReload: false,
+        devMiddleware: {
+            writeToDisk: true,
+        },
+        static: {
+            directory: path.resolve('out'),
+        },
     },
 };

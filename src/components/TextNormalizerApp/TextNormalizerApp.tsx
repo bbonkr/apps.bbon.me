@@ -13,13 +13,8 @@ export const TextNormalizerApp = () => {
     const [isCopied, setIsCopied] = useState(false);
     const replacedParagraph = useRef<HTMLPreElement>(null);
 
-    const {
-        verify,
-        replace,
-        unescape,
-        replaceResult,
-        verifyResults,
-    } = useStringReplaceModule();
+    const { verify, replace, unescape, replaceResult, verifyResults } =
+        useStringReplaceModule();
 
     const handleChangeText = (
         event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -157,3 +152,5 @@ export const TextNormalizerApp = () => {
         </Content>
     );
 };
+
+export default TextNormalizerApp;

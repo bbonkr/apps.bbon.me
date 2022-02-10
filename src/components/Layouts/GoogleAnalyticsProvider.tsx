@@ -14,7 +14,7 @@ const GoogleAnalyticsProvider = ({
     useEffect(() => {
         if (googleAnalyticsId) {
             gtag('event', 'app_started', {
-                debug_mode: process.env.NODE_ENV !== 'production',
+                debug_mode: process.env.ENV !== 'production',
             });
         }
     }, []);
@@ -25,7 +25,7 @@ const GoogleAnalyticsProvider = ({
                 page_title: window.document.title,
                 page_location: window.location.href,
                 page_path: location.pathname,
-                debug_mode: process.env.NODE_ENV !== 'production',
+                debug_mode: process.env.ENV !== 'production',
             });
         }
     }, [location]);
@@ -43,7 +43,7 @@ const GoogleAnalyticsProvider = ({
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${googleAnalyticsId}'${
-                        process.env.NODE_ENV !== 'production'
+                        process.env.ENV !== 'production'
                             ? ", {'debug_mode': true}"
                             : ''
                     });`}</script>

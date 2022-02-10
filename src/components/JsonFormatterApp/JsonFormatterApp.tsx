@@ -5,7 +5,7 @@ import { FaCloudDownloadAlt } from 'react-icons/fa';
 import { MainForm } from './MainForm';
 import { PrintJson } from './PrintJson';
 import { useNotification } from '../../hooks';
-import { FileDownloadHelper } from '@bbon/filedownload';
+import FileDownloadHelper from '@bbon/filedownload';
 import { Helmet } from 'react-helmet-async';
 import Joi from 'joi';
 
@@ -148,3 +148,5 @@ export const JsonFormatterApp = () => {
         </Content>
     );
 };
+
+export default JsonFormatterApp;

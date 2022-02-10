@@ -11,7 +11,7 @@ export const ThemeButton = () => {
 
         gtag('event', 'set_theme', {
             theme: theme ?? 'light-mode',
-            debug_mode: process.env.NODE_ENV !== 'production',
+            debug_mode: process.env.ENV !== 'production',
         });
     };
 

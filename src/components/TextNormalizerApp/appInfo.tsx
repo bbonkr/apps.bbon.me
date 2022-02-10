@@ -2,10 +2,9 @@ import React from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 import { AppModuleInfo } from '../../models/AppModuleInfo';
 import { AsyncComponent, LoadingComponent } from '../AsyncComponent';
-// import { TextNormalizerApp } from './TextNormalizerApp';
 
 const TextNormalizerApp = AsyncComponent(() => import('./TextNormalizerApp'), {
-    resolveComponent: (props) => props.TextNormalizerApp,
+    // resolveComponent: (props) => props.TextNormalizerApp,
     fallback: <LoadingComponent />,
 });
 

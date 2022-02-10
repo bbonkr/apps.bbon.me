@@ -5,7 +5,7 @@ import { AsyncComponent, LoadingComponent } from '../AsyncComponent';
 // import { JsonFormatterApp } from './JsonFormatterApp';
 
 const JsonFormatterApp = AsyncComponent(() => import('./JsonFormatterApp'), {
-    resolveComponent: (props) => props.JsonFormatterApp,
+    // resolveComponent: (props) => props.JsonFormatterApp,
     fallback: <LoadingComponent />,
 });
 

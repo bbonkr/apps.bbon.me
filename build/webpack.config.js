@@ -53,7 +53,7 @@ module.exports = {
                     VERSION: JSON.stringify(package.version),
                     TITLE: JSON.stringify(package.displayName),
                     DESCRIPTION: JSON.stringify(package.description),
-                    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                    ENV: JSON.stringify(process.env.NODE_ENV),
                 },
             },
         }),
