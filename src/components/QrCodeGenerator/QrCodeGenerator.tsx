@@ -359,3 +359,5 @@ export const QrCodeGenerator = () => {
         </Content>
     );
 };
+
+export default QrCodeGenerator;

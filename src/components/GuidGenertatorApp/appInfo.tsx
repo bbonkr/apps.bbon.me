@@ -5,7 +5,7 @@ import { AsyncComponent, LoadingComponent } from '../AsyncComponent';
 // import { GuidGeneratorApp } from './GuidGeneratorApp';
 
 const GuidGeneratorApp = AsyncComponent(() => import('./GuidGeneratorApp'), {
-    resolveComponent: (props) => props.GuidGeneratorApp,
+    // resolveComponent: (props) => props.GuidGeneratorApp,
     fallback: <LoadingComponent />,
 });
 

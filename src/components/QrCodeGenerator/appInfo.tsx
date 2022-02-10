@@ -4,7 +4,7 @@ import { AppModuleInfo } from '../../models/AppModuleInfo';
 import { AsyncComponent, LoadingComponent } from '../AsyncComponent';
 
 const QrCodeGeneratorApp = AsyncComponent(() => import('./QrCodeGenerator'), {
-    resolveComponent: (props) => props.QrCodeGenerator,
+    // resolveComponent: (props) => props.QrCodeGenerator,
     fallback: <LoadingComponent />,
 });
 

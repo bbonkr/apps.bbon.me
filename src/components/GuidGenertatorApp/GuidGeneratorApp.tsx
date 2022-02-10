@@ -159,3 +159,5 @@ export const GuidGeneratorApp = () => {
         </Content>
     );
 };
+
+export default GuidGeneratorApp;
