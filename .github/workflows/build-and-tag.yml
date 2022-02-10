@@ -19,35 +19,47 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: install dependencies
         run: npm install
       - name: lint
         run: npm run lint
       - name: build
+        run: npm run build
         env:
           NODE_ENV: production
-        run: npm run build
 
-      - name: get version
-        id: get_package_version
-        run: echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
-      - name: set version 
-        run: echo "PACKAGE_VERSION=${{ steps.get_package_version.outputs.version }}" >> $GITHUB_ENV 
+      - name: get version 
+        uses: bbonkr/get-version-action@v1.0.3
+        id: get_version 
+        with:
+          project: "./package.json"
+      
+      - name: check git tag 
+        uses: bbonkr/git-tag-check-action@v1.0.9
+        id: git_tag_check
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          tag: ${{ steps.get_version.outputs.version }}
+          prefix: "v"
 
       - name: package-version-to-git-tag
         uses: pkgdeps/git-tag-action@v2
+        if: ${{ steps.git_tag_check.outputs.tag == "" }}
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           github_repo: ${{ github.repository }}
-          version: ${{ env.PACKAGE_VERSION }}
+          version: ${{ steps.get_version.outputs.version }}
           git_commit_sha: ${{ github.sha }}
           git_tag_prefix: "v"
+
       - name: Release Drafter
         id: release_drafter
         uses: release-drafter/release-drafter@v5
+        if: ${{ steps.git_tag_check.outputs.tag == "" }}
         with:
           config-name: release-drafter.yml
-          version: ${{ env.PACKAGE_VERSION }}
+          version: "v{{ steps.get_version.outputs.version }}"
+          publish: true 
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
