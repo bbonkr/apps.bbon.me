@@ -58,7 +58,7 @@
         "@babel/preset-react": "^7.13.13",
         "@babel/preset-typescript": "^7.13.0",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-        "@types/gtag.js": "^0.0.4",
+        "@types/gtag.js": "^0.0.8",
         "@types/halfmoon": "^1.0.0",
         "@types/loadable__component": "^5.13.3",
         "@types/prismjs": "^1.16.5",
