@@ -34,7 +34,7 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@babel/runtime": "^7.17.2",
+        "@babel/runtime": "^7.17.8",
         "@bbon/filedownload": "^1.2.3",
         "@loadable/component": "^5.15.2",
         "halfmoon": "^1.1.1",
