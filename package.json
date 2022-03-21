@@ -39,7 +39,7 @@
         "@loadable/component": "^5.15.2",
         "halfmoon": "^1.1.1",
         "joi": "^17.6.0",
-        "prismjs": "^1.26.0",
+        "prismjs": "^1.27.0",
         "qrcode": "^1.5.0",
         "react": "^17.0.2",
         "react-copy-to-clipboard": "^5.0.4",
