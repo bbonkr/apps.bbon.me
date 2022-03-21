@@ -34,7 +34,7 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@babel/runtime": "^7.17.2",
+        "@babel/runtime": "^7.17.8",
         "@bbon/filedownload": "^1.2.3",
         "@loadable/component": "^5.15.2",
         "halfmoon": "^1.1.1",
@@ -71,7 +71,7 @@
         "@types/smoothscroll-polyfill": "^0.3.1",
         "@types/uuid": "^8.3.4",
         "@types/webpack": "^5.28.0",
-        "@typescript-eslint/eslint-plugin": "^5.11.0",
+        "@typescript-eslint/eslint-plugin": "^5.15.0",
         "@typescript-eslint/parser": "^5.11.0",
         "babel-loader": "^8.2.3",
         "babel-plugin-transform-remove-console": "^6.9.4",
