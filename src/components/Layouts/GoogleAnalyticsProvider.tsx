@@ -1,32 +1,26 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 interface GoogleAnalyticsProviderProps {
     googleAnalyticsId?: string;
 }
 
-const GoogleAnalyticsProvider = ({
+export const GoogleAnalyticsProvider = ({
     googleAnalyticsId,
     children,
-    location,
-}: PropsWithChildren<GoogleAnalyticsProviderProps> & RouteComponentProps) => {
+}: PropsWithChildren<GoogleAnalyticsProviderProps>) => {
+    const location = useLocation();
+
     useEffect(() => {
-        if (googleAnalyticsId) {
-            gtag('event', 'app_started', {
-                debug_mode: process.env.ENV !== 'production',
-            });
+        if (googleAnalyticsId && typeof ga === 'function') {
+            ga('send', 'event', 'app_started', 'app_started');
         }
     }, []);
 
     useEffect(() => {
-        if (googleAnalyticsId && location) {
-            gtag('event', 'page_view', {
-                page_title: window.document.title,
-                page_location: window.location.href,
-                page_path: location.pathname,
-                debug_mode: process.env.ENV !== 'production',
-            });
+        if (googleAnalyticsId && location && typeof ga === 'function') {
+            ga('send', 'pageview', location.pathname);
         }
     }, [location]);
 
@@ -53,7 +47,3 @@ gtag('config', '${googleAnalyticsId}'${
         </React.Fragment>
     );
 };
-
-export const GoogleAnalyticsProviderWithRouter = withRouter(
-    GoogleAnalyticsProvider,
-);
