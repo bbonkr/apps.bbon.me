@@ -8,4 +8,3 @@ export * from './Header';
 export * from './MainLayout';
 export * from './Row';
 export * from './Sidebar';
-export * from './WithGoogleAnalytics';

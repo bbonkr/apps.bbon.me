@@ -3,18 +3,20 @@ import { Location } from 'history';
 import { Link, useLocation } from 'react-router-dom';
 import { Content } from '../Layouts';
 
-interface LocationState {
-    from: Location;
-}
+type LocationState = {
+    from: { pathname?: string };
+};
 
 export const PageNotFound = () => {
-    const { state } = useLocation<LocationState>();
+    const { state } = useLocation();
 
     return (
         <Content title="404 | Page not found">
             <p>
-                <code>{state?.from?.pathname ?? 'The page'}</code> does not
-                exist.
+                <code>
+                    {(state as LocationState)?.from?.pathname ?? 'The page'}
+                </code>{' '}
+                does not exist.
             </p>
             <p>
                 <Link to="/">Go to Home</Link>
