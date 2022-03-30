@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import {
-    HashRouter as Router,
-    Switch,
-    Route,
-    Redirect,
-} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import halfmoon from 'halfmoon';
 import { AsyncComponent, LoadingComponent } from '../AsyncComponent';
 import {
@@ -13,13 +8,14 @@ import {
     ContentWrapper,
     Footer,
     Sidebar,
-    GoogleAnalyticsProviderWithRouter,
+    GoogleAnalyticsProvider,
 } from '../Layouts';
 import { Position } from '../../models';
 import smoothscroll from 'smoothscroll-polyfill';
 import { appModules } from '../../appModules';
 import { useNotification } from '../../hooks';
 import { config } from '../../config';
+import { Redirect } from '../Redirect';
 
 const Header = AsyncComponent(() => import('../Layouts'), {
     resolveComponent: (props) => props.Header,
@@ -113,7 +109,7 @@ export const App = () => {
             </Helmet>
 
             <Router>
-                <GoogleAnalyticsProviderWithRouter
+                <GoogleAnalyticsProvider
                     googleAnalyticsId={googleAnalyticsTraceId}
                 >
                     <MainLayout
@@ -124,43 +120,30 @@ export const App = () => {
                     >
                         <Sidebar />
                         <Header />
+
                         <ContentWrapper scrollPosition={scrollPosition}>
-                            <Switch>
-                                {appModules.map((app) => (
-                                    <Route
-                                        key={app.title}
-                                        path={app.linkTo}
-                                        exact
-                                    >
-                                        {app.app}
-                                    </Route>
-                                ))}
-
-                                <Route path="/about" exact component={About} />
-                                <Route
-                                    path="/404"
-                                    exact
-                                    component={PageNotFound}
-                                />
-
+                            <Routes>
+                                {appModules
+                                    .filter((app) => Boolean(app.linkTo))
+                                    .map((app) => (
+                                        <Route
+                                            key={app.title}
+                                            path={app.linkTo ?? ''}
+                                            element={app.app}
+                                        />
+                                    ))}
+                                <Route path="/about" element={<About />} />
+                                <Route path="/404" element={<PageNotFound />} />
                                 <Route
                                     path="*"
-                                    render={(props) => (
-                                        <Redirect
-                                            to={{
-                                                pathname: '/404',
-                                                state: {
-                                                    from: props.location,
-                                                },
-                                            }}
-                                        />
-                                    )}
-                                ></Route>
-                            </Switch>
+                                    element={<Redirect path="/404" replace />}
+                                />
+                            </Routes>
                         </ContentWrapper>
+
                         <Footer onClickScrollToTop={handleClickScrollTop} />
                     </MainLayout>
-                </GoogleAnalyticsProviderWithRouter>
+                </GoogleAnalyticsProvider>
             </Router>
         </HelmetProvider>
     );

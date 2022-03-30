@@ -9,10 +9,12 @@ export const ThemeButton = () => {
 
         const theme = halfmoon.readCookie('halfmoon_preferredMode');
 
-        gtag('event', 'set_theme', {
-            theme: theme ?? 'light-mode',
-            debug_mode: process.env.ENV !== 'production',
-        });
+        if (typeof ga === 'function') {
+            ga('send', 'event', 'set_theme', {
+                theme: theme ?? 'light-mode',
+                debug_mode: process.env.ENV !== 'production',
+            });
+        }
     };
 
     return (
