@@ -8,3 +8,4 @@ Web app provides feature below.
 * Guid generator
 * Json Formatter
 * QR Code image generator
+* URI Tool
